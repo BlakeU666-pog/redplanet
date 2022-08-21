@@ -1,0 +1,24 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/dominik/Dokumenty/RedPlanet'
+nasm boot/x86/boot.asm -felf32 -o boot.o
+i686-elf-gcc -c main.c -o main.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra -Iinclude
+echo -n "main.o boot.o " >> obj.txt
+cd drivers/display && make 
+make[1]: Entering directory '/home/dominik/Dokumenty/RedPlanet/drivers/display'
+echo -n "drivers/display/display.o " >> ../../obj.txt
+i686-elf-gcc -c display.c -o display.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+make[1]: Leaving directory '/home/dominik/Dokumenty/RedPlanet/drivers/display'
+cd lib/redplanet && make
+make[1]: Entering directory '/home/dominik/Dokumenty/RedPlanet/lib/redplanet'
+echo -n "lib/redplanet/io.o " >> ../../obj.txt
+i686-elf-gcc -c io.c -o io.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+make[1]: Leaving directory '/home/dominik/Dokumenty/RedPlanet/lib/redplanet'
+cd lib/string && make
+make[1]: Entering directory '/home/dominik/Dokumenty/RedPlanet/lib/string'
+echo -n "lib/string/strlen.o " >> ../../obj.txt
+i686-elf-gcc -c strlen.c -o strlen.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+make[1]: Leaving directory '/home/dominik/Dokumenty/RedPlanet/lib/string'
+i686-elf-gcc -T boot/x86/linker.ld -o redplanet.bin -ffreestanding -O2 -nostdlib `cat obj.txt` -lgcc
+rm obj.txt
+make: Leaving directory '/home/dominik/Dokumenty/RedPlanet'
+ 
