@@ -8,13 +8,13 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Aug 21 16:29:33 2022
+# Make data base, printed on Mon Aug 22 12:47:48 2022
 
 # Variables
 
 # environment
 GDK_BACKEND = x11
-# makefile (from 'Makefile', line 4)
+# makefile (from 'Makefile', line 5)
 AS = nasm
 # environment
 LC_ALL = C
@@ -24,6 +24,8 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 GJS_DEBUG_OUTPUT = stderr
+# makefile (from 'Makefile', line 8)
+CFILES = $(shell find . -name "*.c")
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
 # environment
@@ -89,15 +91,16 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 21230
+VSCODE_PID = 7908
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/dominik-B560M-H:@/tmp/.ICE-unix/1693,unix/dominik-B560M-H:/tmp/.ICE-unix/1693
+SESSION_MANAGER = local/dominik-B560M-H:@/tmp/.ICE-unix/1697,unix/dominik-B560M-H:/tmp/.ICE-unix/1697
 # automatic
 *F = $(notdir $*)
+ 
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
@@ -108,6 +111,8 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 VSCODE_NLS_CONFIG = {"locale":"pl","availableLanguages":{"*":"pl"},"_languagePackId":"035059e74cb57ee34ec85f8426bec1d5.pl","_translationsConfigFile":"/home/dominik/.config/Code/clp/035059e74cb57ee34ec85f8426bec1d5.pl/tcf.json","_cacheRoot":"/home/dominik/.config/Code/clp/035059e74cb57ee34ec85f8426bec1d5.pl","_resolvedLanguagePackCoreLocation":"/home/dominik/.config/Code/clp/035059e74cb57ee34ec85f8426bec1d5.pl/e4503b30fc78200f846c62cf8091b76ff5547662","_corruptedFile":"/home/dominik/.config/Code/clp/035059e74cb57ee34ec85f8426bec1d5.pl/corrupted.info","_languagePackSupport":true}
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
+# makefile (from 'Makefile', line 9)
+OBJS = $(CFILES:.c=.o) boot/x86/boot.o
 # environment
 GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # makefile
@@ -131,7 +136,7 @@ MAKEFILES :=
 # automatic
 ^F = $(notdir $^)
 # environment
-INVOCATION_ID = 455ed977cc084cfeb8766ddfddc59b8b
+INVOCATION_ID = ec468fadb566489dbcc75da038ecfe80
 # environment
 USERNAME = dominik
 # environment
@@ -155,9 +160,9 @@ LOGNAME = dominik
 # environment
 GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
-.DEFAULT_GOAL := compile
+.DEFAULT_GOAL := default
 # environment
-SYSTEMD_EXEC_PID = 1712
+SYSTEMD_EXEC_PID = 1716
 # environment
 DISPLAY = :1
 # environment
@@ -168,20 +173,22 @@ GTK_MODULES = gail:atk-bridge
 DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
 # default
 MAKE_VERSION := 4.3
+# 'override' directive
+.SHELLSTATUS := 0
 # environment
-MANAGERPID = 1497
+MANAGERPID = 1499
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 21230
+GIO_LAUNCHED_DESKTOP_FILE_PID = 7908
 # environment
 _ = /usr/share/code/code
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
-# makefile (from 'Makefile', line 5)
+# makefile (from 'Makefile', line 7)
 CFLAGS = -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-JOURNAL_STREAM = 8:38265
+JOURNAL_STREAM = 8:32003
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -197,21 +204,22 @@ VSCODE_IPC_HOOK = /run/user/1000/vscode-e5cc6bac-1.70.2-main.sock
 # default
 .RECIPEPREFIX := 
 # automatic
+ 
 <F = $(notdir $<)
 # default
 SUFFIXES := 
+# makefile (from 'Makefile', line 6)
+LD = i686-elf-ld
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
-# makefile (from 'Makefile', line 3)
+# makefile (from 'Makefile', line 4)
 CC = i686-elf-gcc
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = ubuntu
-# makefile (from 'Makefile', line 19)
-obj := `cat obj.txt`
 # variable set hash-table stats:
-# Load=99/1024=10%, Rehash=0, Collisions=3/129=2%
+# Load=102/1024=10%, Rehash=0, Collisions=3/137=2%
 
 # Pattern-specific Variable Values
 
@@ -225,31 +233,44 @@ obj := `cat obj.txt`
 
 # Implicit Rules
 
-# No implicit rules.
+%.o: %.c
+#  recipe to execute (from 'Makefile', line 15):
+	$(CC) $(CFLAGS) -Iinclude -c $< -o $@
 
+# 1 implicit rules, 0 (0.0%) terminal.
 # Files
 
-compile: bootloader kkernel link
+default: link
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-21 16:10:46.675778667
+#  Last modified 2022-08-22 12:47:47.123216786
 #  File has been updated.
 #  Successfully updated.
+
+# Not a target:
+lib/string/strlen.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 25):
-	@rm *.o
-	@rm drivers/display/*.o
-	@rm lib/redplanet/*.o
-	@rm lib/string/*.o
+#  recipe to execute (from 'Makefile', line 21):
+	@rm -f $(OBJS)
+
+# Not a target:
+drivers/display/display.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -264,47 +285,70 @@ all:
 #  File does not exist.
 #  File has not been updated.
 
-link:
+link: drivers/display/display.o lib/redplanet/io.o lib/string/memset.o lib/string/strlen.o main.o boot/x86/boot.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 21):
-	@$(CC) -T boot/x86/linker.ld -o redplanet.bin -ffreestanding -O2 -nostdlib $(obj) -lgcc
-	@rm obj.txt
+#  recipe to execute (from 'Makefile', line 18):
+	@$(LD) -nostdlib -O2 -Tboot/x86/linker.ld $^ -o redplanet.bin
 
-kkernel:
+# Not a target:
+lib/redplanet/io.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 11):
-	@$(CC) -c main.c -o main.o $(CFLAGS) -Iinclude
-	@echo -n "main.o boot.o " >> obj.txt
-	@cd drivers/display && $(MAKE) 
-	@cd lib/redplanet && $(MAKE)
-	@cd lib/string && $(MAKE)
 
-bootloader:
+makeiso:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 8):
-	@$(AS) boot/x86/boot.asm -felf32 -o boot.o
- 
+#  recipe to execute (from 'Makefile', line 24):
+	@grub-mkrescue -o redplanet.iso iso
+
+# Not a target:
+main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+boot/x86/boot.o: boot/x86/boot.asm
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 12):
+	@$(AS) $< -felf32 -o $@
+
+.PHONY: default
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+boot/x86/boot.asm:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+lib/string/memset.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=9/1024=1%, Rehash=0, Collisions=0/25=0%
+# Load=16/1024=2%, Rehash=0, Collisions=2/37=5%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 23 / storage = 174 B / avg = 7 B
-# current buf: size = 8162 B / used = 174 B / count = 23 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 31 / storage = 307 B / avg = 9 B
+# current buf: size = 8162 B / used = 307 B / count = 31 / avg = 9 B
 
-# strcache performance: lookups = 35 / hit rate = 34%
+# strcache performance: lookups = 45 / hit rate = 31%
 # hash-table stats:
-# Load=23/8192=0%, Rehash=0, Collisions=0/35=0%
-# Finished Make data base on Sun Aug 21 16:29:33 2022
+# Load=31/8192=0%, Rehash=0, Collisions=1/45=2%
+# Finished Make data base on Mon Aug 22 12:47:48 2022
 
  

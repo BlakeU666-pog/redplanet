@@ -1,15 +1,13 @@
-#include "../../include/redplanet.h"
-#include "../../include/display.h"
+#include <boot/x86/asm.h>
+#include <drivers/display.h>
 #include <stdint.h>
 #include <stddef.h>
 
 int VGA_HEIGHT = 25;
 int VGA_WIDTH = 80;
 
-int x;
-int y;
-
-#pragma region __CURSOR_HANDLING
+int cx;
+int cy;
 
 void enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 {
@@ -28,42 +26,41 @@ void set_cursor_p(int x, int y)
 	outb(0x3D5, (uint8_t) (pos & 0xFF));
 	outb(0x3D4, 0x0E);
 	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
+	
+	cx = x;
+	cy = y;
 }
-
-#pragma endregion __CURSOR_HANDLING
-
-#pragma region __BASIC_PRINTING
 
 void putch(char c) {
 	switch (c) {
 		case '\n':
-			x = 0;
-			y++;
+			cx = 0;
+			cy++;
 		break;
 
 		case '\0': return;
 
 		case ' ':
-			x++;
+			cx++;
 		break;
 
 		default:
 		{
-			uint16_t *where = (uint16_t*) 0xB8000 + (y * VGA_WIDTH + x);
+			uint16_t *where = (uint16_t*) 0xB8000 + (cy * VGA_WIDTH + cx);
 			*where = c | (0x0F << 8);
 
-			x++;
+			cx++;
 		}
 		break;
 	}
 
 	//If cursor has reached max width
-	if (x == VGA_WIDTH) {
-		x = 0;
-		y++;
+	if (cx == VGA_WIDTH) {
+		cx = 0;
+		cy++;
 	}
 
-	set_cursor_p(x, y);
+	set_cursor_p(cx, cy);
 }
 
 void print(const char *str) {
@@ -72,23 +69,13 @@ void print(const char *str) {
 	}
 }
 
-#pragma endregion __BASIC_PRINTING
-
-void clear_screen(void) {
-    for (size_t i; i < VGA_WIDTH; i++) {
-        for (size_t j; j < VGA_HEIGHT; j++) {
-            putch(' ');
-        }
-    }
-}
-
-void init_display(void) {
-    print("Initializing display\n");
-
-    int x = 0;
-    int y = 0;
-
-    enable_cursor(0,0); //Enables cursor, just in case if the user would change GRUB settings .
-                        //GRUB automatically enables cursor if GRUB_TIMEOUT is greater than 0.
-    set_cursor_p(x,y);
+void clear_screen() {
+	uint16_t* vidmem = (uint16_t*) 0xB8000;
+	for (size_t y = 0; y < 25; y++) {
+		for (size_t x = 0; x < 80; x++) {
+			const size_t index = y * 80 + x;
+			vidmem[index] = ' ' | (0x0F << 8);
+		}
+	}
+	set_cursor_p(0,0);
 }
