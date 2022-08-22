@@ -1,6 +1,0 @@
-.vscode/
-*.o
-*.bin
-iso/
-drivers/keyboard/
-boot/x86/asm.h
