@@ -1,8 +1,16 @@
-#include <drivers/display.h>
-#include <drivers/kbd.h>
-#include <boot/x86/asm.h>
+#include <drivers/display/display.h>
+#include <drivers/keyboard/kbd.h>
+#include <boot/x86/idt/idt.h>
+#include <boot/x86/pic/pic.h>
 
 void kernel_main() {
 	clear_screen();
-	print("Starting Red Planet...\n");
+	print("Loading Red Planet\n");
+	
+	init_idt();
+	init_PIC();
+	init_keyboard();
+
+	while(1)
+		keyboard_get_key();
 }

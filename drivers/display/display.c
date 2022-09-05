@@ -1,5 +1,5 @@
 #include <boot/x86/asm.h>
-#include <drivers/display.h>
+#include <drivers/display/display.h>
 #include <stdint.h>
 #include <stddef.h>
 
@@ -42,6 +42,16 @@ void putch(char c) {
 
 		case ' ':
 			cx++;
+		break;
+
+		case '\t':
+			cx = cx + 8;
+		break;
+
+		case '\b':
+			cx--;
+			uint16_t *where = (uint16_t*) 0xB8000 + (cy * VGA_WIDTH + cx);
+			*where = ' ' | (0x0F << 8);
 		break;
 
 		default:

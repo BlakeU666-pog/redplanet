@@ -21,5 +21,5 @@ clean:
 	@rm -f $(OBJS)
 
 makeiso:
-	$(shell cp redplanet.bin iso/boot)
-	@grub-mkrescue -o redplanet.iso iso
+	$(shell cp redplanet.bin userspace/boot)
+	@grub-mkrescue -o redplanet.iso userspace

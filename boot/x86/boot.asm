@@ -18,9 +18,22 @@ stack_top:
  
 section .text
 global _start:function (_start.end - _start)
+
+gdtr	DW 0
+	DD 0
+
+setGdt:
+   MOV   AX, [esp + 4]
+   MOV   [gdtr], AX
+   MOV   EAX, [ESP + 8]
+   ADD   EAX, [ESP + 12]
+   MOV   [gdtr + 2], EAX
+   LGDT  [gdtr]
+   RET
+
 _start:
+	call setGdt
 	mov esp, stack_top
- 
 	extern kernel_main
 	call kernel_main
  
