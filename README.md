@@ -4,8 +4,8 @@ This is Red Planet. It's a 32 bit protected mode operating system which currentl
 
 # Currently implemented
 - [x] VGA driver
-- [ ] IDT/IRQ
-- [ ] Keyboard driver
+- [x] IDT/IRQ
+- [x] Keyboard driver (somewhat working)
 - [ ] Filesystem (preferably VFS for now)
 - [ ] ELF loader
 - [ ] Audio support
