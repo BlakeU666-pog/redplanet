@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include <drivers/display/display.h>
+#include <drivers/display/fb/fb.h>
 #include <kernel/string.h>
 
 struct idt_entry {
@@ -29,7 +29,7 @@ void idt_set_gate(unsigned char num, unsigned long base, unsigned short sel, uns
 }
 
 void init_idt() {
-	print("Setting up IDT\n");
+	kprint("Setting up IDT\n");
 	idtp.limit = (sizeof(struct idt_entry) * 256) - 1;
 	idtp.base = (uintptr_t)&idt;
 	memset(&idt, 0, sizeof(struct idt_entry) * 256);

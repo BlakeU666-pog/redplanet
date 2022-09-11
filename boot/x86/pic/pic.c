@@ -1,5 +1,5 @@
 #include "../asm.h"
-#include <drivers/display/display.h>
+#include <drivers/display/fb/fb.h>
 #include "pic.h"
 
 #define PIC1		0x20		/* IO base address for master PIC */
@@ -60,6 +60,6 @@ void PIC_remap(int offset1, int offset2)
 }
 
 void init_PIC() {
-	print("Initializing PIC\n");
+	kprint("Initializing PIC\n");
 	PIC_remap(1,1);
 }
