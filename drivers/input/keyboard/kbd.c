@@ -30,10 +30,8 @@ char *keyboard_readinput(void) {
 				if (pos == 0) return;
 				buf[strlen(buf)-1] = '\0';
 				pos--;
-				kputch(map_us[c]);
 			}
 			pos++;
-			append(buf, c);
 			kputch(map_us[c]);
 		}
 	} while (c != 28);

@@ -14,11 +14,6 @@ void kernel_main() {
 
 	while (1) {
 		kprint("> ");
-		char *input = keyboard_readinput();
-		kprint(&input);
-		if (strcmp(input, "exit") == 0) {
-			kprint("Stopping Red Planet\n");
-			asm volatile("hlt");
-		}
+		keyboard_readinput();
 	}
 }

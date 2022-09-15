@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include <drivers/display/fb/fb.h>
-#include <kernel/string.h>
+#include <include/string.h>
 
 struct idt_entry {
 	unsigned short base_low;
